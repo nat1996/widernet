@@ -1,0 +1,182 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<script src="./jquery-2.2.2.js" type="text/javascript"></script>
+
+<title>WiderNet Manager Portal</title>
+<!--<link href="Wdefault.css" rel="stylesheet" type="text/css" title="Original">-->
+<link href="CustomStyleA.css" rel="stylesheet" type="text/css" title="CustomA">
+<meta http-equiv="Default-Style" content="CustomA"> <!-- Sets the stylesheet to be used. -->
+</head>
+
+<body>
+<div align="center">
+  <center>
+  <div align="center">
+    <center>
+
+<table border="0" width="80%" cellpadding="0" style="border-collapse: collapse" id="table4">
+	<tr>
+		<td>
+		<p style="margin-top: 0; margin-bottom: 0">
+		<font size="5" face="Verdana" color="#B7B9BB"><b>
+		<img alt="eGranary Logo" height="38" src="./eGranaryLogo.png" width="42"> eGranary </b></font><b><font size="5" color="#B7B9BB">Hosts</font></b></p>
+		</td>
+		<td align="right">
+		<p style="margin-top: 0; margin-bottom: 0">
+		<font color="#4D4A43" size="2"><b>&nbsp;<a style="text-decoration: none" href="HostAdd.php">Add Host</a>&nbsp; 
+		| <a style="text-decoration: none;" href="../eGranaryResources/PermissionPointsByLibrarian.asp">My 
+		Content</a> | <a style="text-decoration: none" onmouseover="" href="javascript:alert('Not implemented yet. Will display assigned report titles.');">Reports</a> | <a style="text-decoration: none;" href="ManageCategories.php">Manage Categories</a> | <a href="ManageLanguages.php" style="text-decoration:none">Manage Languages</a>
+</td> 
+	</tr>
+	<tr>
+		<td colspan="2">
+<hr noshade color="#4D4A43" size="3">
+        
+      	</td>
+	</tr>
+</table>
+        
+      <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+    <table border="0" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111" width="80%" id="AutoNumber21">
+      <tr>
+        <td width="100%">
+        <table border="2" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-top:0; margin-bottom:0" bordercolor="#003399" width="100%" id="AutoNumber12" bgcolor="#E3EDFD" height="84">
+          <tr>
+            <td align="center" style="margin-top: 0; margin-bottom: 0">
+            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-top:0; margin-bottom:0" id="AutoNumber13">
+              <tr>
+                <td style="margin-top: 0; margin-bottom: 0">
+                <div align="center">
+                  <center>
+                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber16">
+                    <tr>
+                      <td>
+                      <form method="GET" action="HostsIndex.php" style="margin-top: 2; margin-bottom: 2">
+                        <p style="margin-top: 0; margin-bottom: 0">
+                        <font color="#003366"><b>Host Search</b></font> <font size="2">
+						Name =</font>
+                        <input type="text" name="Part" size="33" value="">
+                        <input type="submit" value="Search" name="Search" style="font-size: 10px">
+                        </p>
+                      </form>
+                      </td>
+                    </tr>
+                  </table>
+                  </center>
+                </div>
+                <div align="center">
+                  <center>
+                  <!-- we could reduce this code down to four lines in PHP, I will consult with Cliff. Plus, we already have the code for it!! -->
+                 
+
+                  <!-- would reduce almost 200 lines of code, and make mass editing easier -->
+                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-top:0; margin-bottom:0" bordercolor="#111111" id="AutoNumber17">
+                    <tr>
+                      <td nowrap valign="top" style="margin-top: 0; margin-bottom: 0">
+                      <p style="margin-top: 0; margin-bottom: 0">
+                      <font color="#003366"><b>or</b></font>
+                      <font size="2">starts with</font></p>
+                      </td>
+                      <td valign="top" style="margin-top: 0; margin-bottom: 0">
+                      &nbsp;</td>
+                      <td valign="top" style="margin-top: 0; margin-bottom: 0">
+                      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-top:0; margin-bottom:0" bordercolor="#111111" id="AutoNumber18">
+                        <tr>
+                        <!-- look how effcient!!!!!!!!!!!!!!!!! :) -->
+                        <td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='A' name='A'></p><input type='hidden' name='Initial' value='A'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='B' name='B'></p><input type='hidden' name='Initial' value='B'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='C' name='C'></p><input type='hidden' name='Initial' value='C'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='D' name='D'></p><input type='hidden' name='Initial' value='D'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='E' name='E'></p><input type='hidden' name='Initial' value='E'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='F' name='F'></p><input type='hidden' name='Initial' value='F'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='G' name='G'></p><input type='hidden' name='Initial' value='G'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='H' name='H'></p><input type='hidden' name='Initial' value='H'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='I' name='I'></p><input type='hidden' name='Initial' value='I'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='J' name='J'></p><input type='hidden' name='Initial' value='J'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='K' name='K'></p><input type='hidden' name='Initial' value='K'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='L' name='L'></p><input type='hidden' name='Initial' value='L'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='M' name='M'></p><input type='hidden' name='Initial' value='M'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='N' name='N'></p><input type='hidden' name='Initial' value='N'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='O' name='O'></p><input type='hidden' name='Initial' value='O'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='P' name='P'></p><input type='hidden' name='Initial' value='P'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='Q' name='Q'></p><input type='hidden' name='Initial' value='Q'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='R' name='R'></p><input type='hidden' name='Initial' value='R'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='S' name='S'></p><input type='hidden' name='Initial' value='S'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='T' name='T'></p><input type='hidden' name='Initial' value='T'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='U' name='U'></p><input type='hidden' name='Initial' value='U'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='V' name='V'></p><input type='hidden' name='Initial' value='V'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='W' name='W'></p><input type='hidden' name='Initial' value='W'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='X' name='X'></p><input type='hidden' name='Initial' value='X'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='Y' name='Y'></p><input type='hidden' name='Initial' value='Y'></form></td><td><form method='GET' action='HostsIndex.php' style='margin-top: 0; margin-bottom: 0'><p style='margin-top: 0; margin-bottom: 0'><input type='submit' style='width: 25px' value='Z' name='Z'></p><input type='hidden' name='Initial' value='Z'></form></td>                        </tr>
+                      </table>
+                      </td>
+                    </tr>
+                    </table>
+                  </center>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="margin-top: 0; margin-bottom: 0" align="center">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" id="table1">
+              <tr>
+                <td>
+                <form method="GET" action="HostsIndex.php" style="margin-top: 4; margin-bottom: 0"> <!-- Using ScrapeAdmin's already ported HostsIndexAll for now -->
+                  <p align="center" style="margin-top: 0; margin-bottom: 0">
+                      <font color="#003366"><b>or</b></font>
+                      <font size="2">show all </font>
+                        <input type="submit" value="ALL" name="All" style="font-size: 10px"><font size="2"> </font>
+                  </p>
+                	<input type="hidden" name="Initial0" value="%">
+                </form>
+                </td>
+              </tr>
+            </table>
+                </td>
+              </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        
+        <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+        <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#EAEAEA" width="100%" id="table2">
+          <tr>
+            <td width="100%">
+            <table cellspacing="0" cellpadding="4" border="0" style="border-collapse: collapse" bordercolor="#EAEAEA" width="100%" id="table3">
+              <thead>
+                <tr>
+                  <td class="projectTableHead" width="10%">
+                  <p style="margin-top: 0; margin-bottom: 0; height: 10px;">
+					<a class="sortable" href="HostsIndex.php?sort=HostID&amp;Initial=&amp;Part=&amp;sortOrder=DESC">
+						Host ID
+					</a>
+										</td>
+                  <td class="projectTableHead" width="3%">&nbsp;</td>
+                  <td class="projectTableHead">
+					<a class ="sortable"  href="HostsIndex.php?sort=Host&amp;Initial=&amp;Part=&amp;sortOrder=DESC">
+						Host
+					</a>
+											
+				  </td>
+                  <td class="projectTableHead" width="8%";>
+                  Website URL</td>
+                  <td class="projectTableHead" width="3%">
+                  &nbsp;</td>
+                  <td class="projectTableHead" style="white-space: nowrap" width="8%">
+                  <a class="sortable" href="HostsIndex.php?sort=Status&amp;Initial=&amp;Part=&amp;sortOrder=DESC">
+                  Permitted?
+                  </a>
+                                    </td>
+                  <td class="projectTableHead" width="3%">
+                  &nbsp;</td>
+                  <td class="projectTableHead" width="15%">
+                  <p style="margin-top: 0; margin-bottom: 0">
+					<a class="sortable" href="HostsIndex.php?sort=CountResource&amp;Initial=&amp;Part=&amp;sortOrder=DESC">
+					Number of <br>Resources
+					</a>
+					</td>
+                  <td class="projectTableHead" width="3%">&nbsp;</td>
+                  <td class="projectTableHead" width="15%">
+                  <a class="sortable" href="HostsIndex.php?sort=MirrorProjects&amp;Initial=&amp;Part=&amp;sortOrder=DESC">
+                   Number of <br>Mirror Projects
+                   </a>
+                   					</td>
+                </tr>
+
+              </thead>
+            </table>
+            </tr></td>
+          </tr>
+</table>
+
+        </td>
+      </tr>
+    </table>
+    </center>
+  </div>
+  </center>
+</div>
+<p>&nbsp;</p>
+</body>
+
+</html>

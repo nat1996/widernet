@@ -1,0 +1,94 @@
+body         { 
+	font-family: Verdana, Geneva, Tahoma, sans-serif; 
+	font-size: 10pt;
+	height: 100%;
+	
+}
+
+h1 {
+	color:#008080;
+	text-align:center;
+	font-size:24pt;
+	font-weight:bold;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+img {
+text-decoration: none;
+border:none;
+}
+
+table {
+	border-collapse:collapse;
+}
+
+td { 
+	font-size: 12pt; 
+	font-family: Verdana;
+	vertical-align:top;
+	color:black;
+
+}
+
+label {
+	font-weight:bold;
+}
+
+
+.projectTableHead { 
+	border-left-width: 1px; 
+	border-right-width: 1px; 
+	border-top-width: 1px; 
+	border-bottom-style: solid; 
+	border-bottom-width:1px;
+	border-color: #003366;
+	background-color:#EAEAEA;
+	font-size:10px;
+	text-align:left;
+	color:#7c7c7c;
+	height:27px;
+}
+
+.sortable {
+	text-decoration:underline;
+	color:#808080;	
+}
+
+.sortable a {
+	color:inherit;
+}
+
+.dataCell {
+	border-left-width:1px;
+	border-right-width: 1px;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	font-size:18px;
+	height: 27px;
+}
+
+.dataCell a {
+		font-size:inherit;
+		text-decoration:none;
+}
+
+.dataCell:hover a {
+	text-decoration:underline;
+}
+
+.addHost{
+		font-size:inherit;
+		text-decoration:none;
+}
+
+
+.addHost:hover {
+	text-decoration:underline;
+}
+
+
+
+button {
+	color:#808080;
+}
