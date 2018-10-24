@@ -40,14 +40,14 @@
   <div class="example-container mat-elevation-z8">
 
   <table class="table table-hover">
-    <thead>
-      <td>User</td>
-      <td>Category</td>
-      <td>Resource</td>
-      <td>Resource Type</td>
-      <td>Status</td>
-      <td>Approve</td>
-      <td>Edit</td>
+    <thead class="thead-light ">
+      <th>User</th>
+      <th>Category</th>
+      <th>Resource</th>
+      <th>Resource Type</th>
+      <th>Status</th>
+      <th>Approve</th>
+      <th>Edit</th>
     </thead>
     <tbody>
       <tr *ngFor="let x of result; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
@@ -66,7 +66,7 @@
     </tbody>
   </table>
 
-  <div *ngIf="edit"> 
+  <div class="edit" *ngIf="edit"> 
       <p>What needs to be fixed?</p>
       <input type="checkbox" name="Category" value="Category"> Miscategorized<br>
       <input type="checkbox" name="Type" value="Type"> Mistyped<br>

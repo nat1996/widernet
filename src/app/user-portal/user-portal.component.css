@@ -1,9 +1,9 @@
-body { 
+/* body { 
 	font-family: Verdana, Geneva, Tahoma, sans-serif; 
 	font-size: 10pt;
 	height: 100%;
 	
-}
+} */
 
 h1 {
 	color:#008080;
@@ -22,13 +22,13 @@ table {
 	border-collapse:collapse;
 }
 
-td { 
+/* td { 
 	font-size: 12pt; 
 	font-family: Verdana;
 	vertical-align:top;
 	color:black;
 
-}
+} */
 
 label {
 	font-weight:bold;
@@ -58,23 +58,25 @@ label {
 	color:inherit;
 }
 
-.dataCell {
+/* .dataCell {
 	border-left-width:1px;
 	border-right-width: 1px;
 	border-top-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
-	font-size:18px;
+	/* font-size:18px;
 	height: 27px;
-}
+} */
 
 .dataCell a {
 		font-size:inherit;
 		text-decoration:none;
 }
 
-.dataCell:hover a {
+.dataCell:hover td {
 	text-decoration:underline;
+	background-color: #123456 !important;
+    color: white;
 }
 
 .addHost{
@@ -92,3 +94,23 @@ label {
 button {
 	color:#808080;
 }
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .table tr.active td {
+    background-color: #123456 !important;
+    color: white;
+  }
+  
