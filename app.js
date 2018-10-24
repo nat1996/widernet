@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 
 
-var server = app.listen(3306, "127.0.0.1", function () {
+var server = app.listen(3300, "127.0.0.1", function () {
  
     var host = server.address().address
     var port = server.address().port
@@ -93,10 +93,10 @@ app.get('/checkUserPass/:user/:pass', function(req, res, next) {
    });
 
 });
-
+//eventually remove the limit of 5 in the following function
 app.get('/getCatDetails/:user', function(req, res, next) {
   var user = req.params.user;
-	connection.query("select R.URL, R.Type, R.LastReviewBy, C.Category from test.rp R inner join test.lkupegcategories C on R.CategoryID=C.eGCategoryID where User=? limit 5", [user] , function (error, results) {
+	connection.query("select R.User, R.URL, R.Type, R.LastReviewBy, C.Category from test.rp R inner join test.lkupegcategories C on R.CategoryID=C.eGCategoryID where User=? limit 5", [user] , function (error, results) {
         if (error) throw error;
   console.log(results);
      res.end(JSON.stringify({"status": 200, "error": null, "response": results}));

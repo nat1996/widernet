@@ -36,12 +36,13 @@ export class UserPortalComponent implements OnInit {
   getName(): void {
     // TODO: send the message _after_ fetching the heroes
     const user = +this.route.snapshot.paramMap.get('user');
+    
     this.user = this.linkService.getName();
         
   }
 
   getCategory(id: number): string {
-    this.http.get('http://127.0.0.1:3306/getCategory/' + id).subscribe(data => {
+    this.http.get('http://127.0.0.1:3300/getCategory/' + id).subscribe(data => {
       console.log(data["response"][0]["Category"]);
       //return data["response"][0]["Category"];
       this.data = data["response"][0]["Category"];
@@ -52,13 +53,13 @@ export class UserPortalComponent implements OnInit {
   }
  
   getCatDetails(user: string): boolean {
-    this.http.get('http://127.0.0.1:3306/getCatDetails/' + user).subscribe(data => {
+    this.http.get('http://127.0.0.1:3300/getCatDetails/' + user).subscribe(data => {
       this.obs = data["response"];
       for (let i: number = 0; i < this.obs.length; i++) {
         let c: CatDetails = new CatDetails();
         c.setCategory(this.obs[i]["Category"]);
-        c.setLastReview(this.obs[i]["LastReviewBy"]);
-        c.setLogins(this.obs[i]["Type"]);
+        c.setLastReviewBy(this.obs[i]["LastReviewBy"]);
+        c.setType(this.obs[i]["Type"]);
         c.setURL(this.obs[i]["URL"]);
         //let x: number = this.obs[i]["CategoryID"];
         //console.log("x=" + x);
@@ -78,16 +79,16 @@ export class UserPortalComponent implements OnInit {
 
 class CatDetails {
   URL: string;
-  LastReview: string;
+  LastReviewBy: string;
   CategoryID: number;
-  Logins: string;
+  Type: string;
   Category: string;
 
   public CatDetails() {
       this.URL = '';
-      this.LastReview = '';
+      this.LastReviewBy = '';
       this.CategoryID = -1;
-      this.Logins = '';
+      this.Type = '';
       this.Category = '';
   }
 
@@ -100,11 +101,11 @@ class CatDetails {
   }
 
   public getLastReview(): string {
-      return this.LastReview;
+      return this.LastReviewBy;
   }
 
-  public setLastReview(LastReview: string): void {
-      this.LastReview = LastReview;
+  public setLastReviewBy(LastReviewBy: string): void {
+      this.LastReviewBy = LastReviewBy;
   }
 
   public getCategoryID(): number {
@@ -115,12 +116,12 @@ class CatDetails {
       this.CategoryID = id;
   }
 
-  public getLogins(): string {
-      return this.Logins;
+  public getType(): string {
+      return this.Type;
   }
 
-  public setLogins(logins: string): void {
-      this.Logins = logins;
+  public setType(Types: string): void {
+      this.Type = Types;
   }
 
   public getCategory(): string {

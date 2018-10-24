@@ -32,12 +32,13 @@ export class LoginComponent implements OnInit {
     this.inDB = false;
   }
 
+
   setName(user: string): void {
     this.linkService.id = this.usr;
   }
 
   checkUserPass(user: string, pass: string): boolean {
-    this.http.get('http://127.0.0.1:3306/checkUserPass/' + user + "/" + pass).subscribe(data => {
+    this.http.get('http://127.0.0.1:3300/checkUserPass/' + user + "/" + pass).subscribe(data => {
       console.log("data " + data);
       this.match = data["response"][0]["count(*)"] === 1;
       console.log("match = " + this.match);
