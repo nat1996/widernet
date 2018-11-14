@@ -45,9 +45,14 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
+  MatTable,
 } from '@angular/material';
 import { ManagerPortalComponent } from './manager-portal/manager-portal.component';
 import { Portal } from '@angular/cdk/portal';
+import { ManagerLoginComponent } from './manager-login/manager-login.component';
+import { ManagerRegisterComponent } from './manager-register/manager-register.component';
+import { TestComponent } from './test/test.component';
+
 
 @NgModule({
   declarations: [
@@ -55,13 +60,20 @@ import { Portal } from '@angular/cdk/portal';
     UserPortalComponent,
     RegisterLoginComponent,
     LoginComponent,
-    ManagerPortalComponent
+    ManagerPortalComponent,
+    ManagerLoginComponent,
+    ManagerRegisterComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent],

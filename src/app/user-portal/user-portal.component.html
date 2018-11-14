@@ -37,7 +37,9 @@
                   <!-- end of Top bar with eGranary logo (which is old code) -->
   </div>
 
-<div class="example-container mat-elevation-z8" >       
+<div class="example-container mat-elevation-z8" >
+    <div class="table-responsive">
+       
           <table class="table  " >
               <thead class="thead-light">
                 <tr>
@@ -45,6 +47,7 @@
                   <th scope="col">Resource</th>
                   <th scope="col">Resource Type</th>
                   <th scope="col">Status</th>
+                  <th scope="col">Comments</th>
                 </tr>
               </thead>
               <tbody>
@@ -52,19 +55,22 @@
                       <td class="dataCell">
                           {{x.Category}}
                       </td>
-                      <td class="dataCell">
-                          {{x.URL}}
-                      </td>
+                      
+                          <td class="dataCell"><a href="{{x.URL}}">{{x.URL}}</a></td>
+                      
                       <td class="dataCell">
                           {{x.Type}}
                       </td>
                       <td class="dataCell">
                           {{ x.LastReviewBy }}
-
+                      </td>
+                      <td class="dataCell">
+                          {{ x.Comments }}
                       </td>
                     </tr>
               </tbody>
             </table>
+            </div>
 </div>
           <!-- <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
           <table border="0" cellpadding="0" style="border-collapse: collapse" bordercolor="#111111" width="80%" id="AutoNumber21">

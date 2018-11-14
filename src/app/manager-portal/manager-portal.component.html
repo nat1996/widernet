@@ -23,7 +23,7 @@
 		            <p style="margin-top: 0; margin-bottom: 0">
 		              <font size="5" face="Verdana" color="#B7B9BB">
                     <b>
-                      <img alt="eGranary Logo" height="38" src="../assets/eGranaryLogo.png" width="42"> eGranary </b></font><b><font size="5" color="#B7B9BB">User Portal</font>
+                      <img alt="eGranary Logo" height="38" src="../assets/eGranaryLogo.png" width="42"> eGranary </b></font><b><font size="5" color="#B7B9BB">Manager Portal</font>
                     </b>
                 </p>
 		          </td>
@@ -36,24 +36,51 @@
           </table>
                   <!-- end of Top bar with eGranary logo (which is old code) -->
   </div>
-
+  <div>
+  <div class="example-container mat-elevation-z8 filter">
+    <div>
+        <h3>Filter Options: </h3>
+        <label>None</label>
+        <input  class = "filterInput" name="options" ng-control="options" type="radio" value=0 [(ngModel)]="filter" >
+        <label>Category </label>
+        <input class = "filterInput" name="options" ng-control="options" type="radio" value=1 [(ngModel)]="filter" >
+        <label>Status </label>
+        <input  class = "filterInput" name="options" ng-control="options" type="radio" value=2 [(ngModel)]="filter" >
+    </div>
+    <div *ngIf="filter=='1'">
+        <label>Filter Category</label>
+        <input class = "typeShort" type="text" name="catFilter" id="catFilter" [(ngModel)]="categoryFilter" [value]="serial" class="form-control">
+        <button type="button" (click)="filterCategory(categoryFilter)">Filter</button>
+        
+    </div>
+    <div *ngIf="filter=='2'">
+            <label>Approved </label>
+            <input class = "filterInput" name="options" ng-control="options" type="checkbox" [value]="approved" [(ngModel)]="approved" >
+            <label>Pending </label>
+            <input class = "filterInput" name="options" ng-control="options" type="checkbox" [value]="pending" [(ngModel)]="pending" >
+            <label>Edit </label>
+            <input class = "filterInput" name="options" ng-control="options" type="checkbox" [value]="edit" [(ngModel)]="edited" >
+            <button type="button" (click)="filterStatus(approved,pending,edited)">Filter</button>
+    </div>
+  </div>
+</div>
   <div class="example-container mat-elevation-z8">
-
+  <div class="table-responsive">
   <table class="table table-hover">
     <thead class="thead-light ">
-      <th>User</th>
-      <th>Category</th>
-      <th>Resource</th>
-      <th>Resource Type</th>
-      <th>Status</th>
-      <th>Approve</th>
-      <th>Edit</th>
+        <th>User<button type="button" class="glyphicon glyphicon-sort" (click)="sortUser(u)"></button></th>
+        <th>Category</th>
+        <th>Resource</th>
+        <th>Resource Type<button type="button" class="glyphicon glyphicon-sort" (click)="sortType(t)"></button></th>
+        <th>Status<button type="button" class="glyphicon glyphicon-sort"></button></th>
+        <th>Approve</th>
+        <th>Edit</th>
     </thead>
     <tbody>
       <tr *ngFor="let x of result; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
         <td>{{x.User}}</td>
         <td>{{x.Category}}</td>
-        <td>{{x.URL}}</td>
+        <td><a href="{{x.URL}}">{{x.URL}}</a></td>
         <td>{{x.Type}}</td>
         <td>{{x.LastReviewBy}}</td>
         <td>
@@ -65,21 +92,32 @@
       </tr>
     </tbody>
   </table>
-
+  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  
   <div class="edit" *ngIf="edit"> 
-      <p>What needs to be fixed?</p>
-      <input type="checkbox" name="Category" value="Category"> Miscategorized<br>
-      <input type="checkbox" name="Type" value="Type"> Mistyped<br>
+      <p>Which item needs to be fixed?</p>
+      <div *ngFor="let object of items">
+          <input type="checkbox" [(ngModel)]="issues"> {{object}}<br>
+      </div>
+      <p>What is the problem?</p>
+      <input type="checkbox" name="Category" value="Category" [(ngModel)]="miscategorized"> Miscategorized<br>
+      <input type="checkbox" name="Type" value="Type" [(ngModel)]="mistyped"> Mistyped<br>
       <form>
-          Comments: <input type="text" name="Comments" value=""><br>
-          <input type="submit" value="Submit">
+          Comments: <input type="text" name="Comments" value="" required [(ngModel)]="comments" name = "comments"><br>
+          <input type="submit" class=" btn btn-md btn-primary"  (click) = "sendEdit()" value="Submit">
           </form>
   </div>
+  <h2>Download Catalog Record Data as CSV file </h2>
+  <p><button (click)="clickEvent()"> Export to CSV </button></p>
 <!-- 
   <div class="well well-lg">
       Selected Row : <strong>{{selectedRow}}</strong>
   </div> -->
  
 </div>
+
+<!-- <h2>Download Catalog Record Data as CSV file </h2>
+<p><button (click)="clickEvent()"> Export to CSV </button></p> -->
 </body>
 </html>

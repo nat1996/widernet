@@ -1,0 +1,123 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<script src="./jquery-2.2.2.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<title>WiderNet Manager Portal</title>
+<!--<link href="Wdefault.css" rel="stylesheet" type="text/css" title="Original">-->
+
+<meta http-equiv="Default-Style" content="CustomA"> <!-- Sets the stylesheet to be used. -->
+</head>
+
+<body>
+
+
+  
+<div class="d-flex justify-content-center">
+          <table border="0" width="80%" cellpadding="0" style="border-collapse: collapse" id="table4">
+	          <tr>
+		          <td>
+		            <p style="margin-top: 0; margin-bottom: 0">
+		              <font size="5" face="Verdana" color="#B7B9BB">
+                    <b>
+                      <img alt="eGranary Logo" height="38" src="../assets/eGranaryLogo.png" width="42"> eGranary </b></font><b><font size="5" color="#B7B9BB">User Portal</font>
+                    </b>
+                </p>
+		          </td>
+	          </tr>
+	          <tr>
+		          <td colspan="2">
+                <hr noshade color="#4D4A43" size="3">
+              </td>
+	          </tr>
+          </table>
+                  <!-- end of Top bar with eGranary logo (which is old code) -->
+  </div>
+
+
+<p>{{result}} hi</p>
+
+  <table mat-table [dataSource]="result">
+      <ng-container matColumnDef="userName">
+          <th mat-header-cell *matHeaderCellDef> User </th>
+          <td mat-cell *matCellDef="let user"> {{user.User}} </td>
+      </ng-container>
+      <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let user"> {{user.Category}} </td>
+      </ng-container>
+      <ng-container matColumnDef="resource">
+          <th mat-header-cell *matHeaderCellDef> Resource </th>
+          <td mat-cell *matCellDef="let user"> {{user.URL}} </td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Resource Type</th>
+          <td mat-cell *matCellDef="let user"> {{user.Type}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status</th>
+          <td mat-cell *matCellDef="let user"> {{user.LastReviewBy}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table>
+
+  <div class="example-container mat-elevation-z8">
+  <div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="thead-light ">
+      <th>User<button type="button" class="glyphicon glyphicon-sort"></button></th>
+      <th>Category</th>
+      <th>Resource</th>
+      <th>Resource Type</th>
+      <th>Status<button type="button" class="glyphicon glyphicon-sort"></button></th>
+      <th>Approve</th>
+      <th>Edit</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of result; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+        <td>{{x.User}}</td>
+        <td>{{x.Category}}</td>
+        <td><a href="{{x.URL}}">{{x.URL}}</a></td>
+        <td>{{x.Type}}</td>
+        <td>{{x.LastReviewBy}}</td>
+        <td>
+            <button type="button" (click)="onSelectApprove(x)"class="glyphicon glyphicon-ok"></button>
+        </td>
+        <td>
+            <button type="button" (click)="onSelectEdit(x)"class="glyphicon glyphicon-edit"></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+  <h2>Download Catalog Record Data as CSV file </h2>
+  <p><button (click)="clickEvent()"> Export to CSV </button></p>
+  <div class="edit" *ngIf="edit"> 
+      <p>Which item needs to be fixed?</p>
+      <div *ngFor="let object of items">
+          <input type="checkbox" [(ngModel)]="issues"> {{object}}<br>
+      </div>
+      <p>What is the problem?</p>
+      <input type="checkbox" name="Category" value="Category" [(ngModel)]="miscategorized"> Miscategorized<br>
+      <input type="checkbox" name="Type" value="Type" [(ngModel)]="mistyped"> Mistyped<br>
+      <form>
+          Comments: <input type="text" name="Comments" value="" required [(ngModel)]="comments" name = "comments"><br>
+          <input type="submit" class=" btn btn-md btn-primary"  (click) = "sendEdit()" value="Submit">
+          </form>
+  </div>
+<!-- 
+  <div class="well well-lg">
+      Selected Row : <strong>{{selectedRow}}</strong>
+  </div> -->
+ 
+</div>
+
+<!-- <h2>Download Catalog Record Data as CSV file </h2>
+<p><button (click)="clickEvent()"> Export to CSV </button></p> -->
+</body>
+</html>

@@ -39,7 +39,7 @@ export class RegisterLoginComponent implements OnInit {
   }
 
   insertUser(user: string, pass: string) {
-    this.http.post('http://127.0.0.1:3300/addUser/' + user + "/" + pass, this.httpOptions).subscribe(data => console.log(data));
+    this.http.post('http://127.0.0.1:3300/addUser/' + user + "/" + pass + "/" + 1, this.httpOptions).subscribe(data => console.log(data));
     console.log("insert user");
   }
 

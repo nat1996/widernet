@@ -61,6 +61,7 @@ export class UserPortalComponent implements OnInit {
         c.setLastReviewBy(this.obs[i]["LastReviewBy"]);
         c.setType(this.obs[i]["Type"]);
         c.setURL(this.obs[i]["URL"]);
+        c.setComments(this.obs[i]["Comments"]);
         //let x: number = this.obs[i]["CategoryID"];
         //console.log("x=" + x);
         //let cat: string = this.getCategory(x);
@@ -83,6 +84,7 @@ class CatDetails {
   CategoryID: number;
   Type: string;
   Category: string;
+  Comments: string;
 
   public CatDetails() {
       this.URL = '';
@@ -90,6 +92,15 @@ class CatDetails {
       this.CategoryID = -1;
       this.Type = '';
       this.Category = '';
+      this.Comments = '';
+  }
+
+  public getComments(): string {
+      return this.Comments;
+  }
+
+  public setComments(comments: string): void {
+      this.Comments = comments;
   }
 
   public getURL(): string {
