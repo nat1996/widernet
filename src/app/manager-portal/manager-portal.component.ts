@@ -40,7 +40,7 @@ export class ManagerPortalComponent implements OnInit {
   u = false;
   r = false;
   t = false;
-
+  
   uUp = false;
   tUp = false;
 
@@ -335,23 +335,23 @@ export class ManagerPortalComponent implements OnInit {
             // if(v == data["response"].length-1){
             //   alert('www')
             // }
-            const options = {
-              fieldSeparator: ',',
-              quoteStrings: '"',
-              decimalseparator: '.',
-              showLabels: true,
-                  showTitle: true,
-                  title: 'Catalog Records',
-                  useBom: true,
-                  useKeysAsHeaders: true,
-                  // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
-                };
-            //if(v){
-              v= false;
-              const csvExporter = new ExportToCsv(options);
+            // const options = {
+            //   fieldSeparator: ',',
+            //   quoteStrings: '"',
+            //   decimalseparator: '.',
+            //   showLabels: true,
+            //       showTitle: true,
+            //       title: 'Catalog Records',
+            //       useBom: true,
+            //       useKeysAsHeaders: true,
+            //       // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+            //     };
+            // //if(v){
+            //   v= false;
+            //   const csvExporter = new ExportToCsv(options);
       
-              csvExporter.generateCsv(resultlist);
-              alert("Catalog Record Saved Successfully");
+            //   csvExporter.generateCsv(resultlist);
+            //   alert("Catalog Record Saved Successfully");
             //}
             
 
@@ -389,6 +389,29 @@ export class ManagerPortalComponent implements OnInit {
 
       
     });
+    setTimeout(() => 
+    {
+      const options = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalseparator: '.',
+        showLabels: true,
+            showTitle: true,
+            title: 'Catalog Records',
+            useBom: true,
+            useKeysAsHeaders: true,
+            // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+          };
+      //if(v){
+        v= false;
+        const csvExporter = new ExportToCsv(options);
+
+        csvExporter.generateCsv(resultlist);
+      console.log(resultlist);
+    },
+    1000);
+ 
+    
 
     //this.http.get('http://127.0.0.1:3300/getCatDetails/' + this.user).subscribe(data => {
                   //this.rows = data["response"];
