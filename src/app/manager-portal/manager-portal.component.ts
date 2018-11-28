@@ -317,11 +317,7 @@ export class ManagerPortalComponent implements OnInit {
         let val: boolean = false;
         this.http.get('http://127.0.0.1:3300/getCatDetails/' + fieldUsers).subscribe(d =>{
           //console.log(d);
-          for(let w of d){
-            if((d["response"].length != 0){
-
-            }
-          };
+          
           if(d["response"].length != 0){
             console.log(d["response"]);
             
