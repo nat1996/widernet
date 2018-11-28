@@ -322,8 +322,13 @@ export class ManagerPortalComponent implements OnInit {
             console.log(d["response"]);
             
 
-            this.rows = d["response"]
-            resultlist = resultlist.concat(this.rows)
+            this.rows = d["response"];
+            for(let row of d["response"]){
+              if(row["LastReviewBy"] == "approved"){
+                resultlist = resultlist.concat(row);
+              }
+            };
+            //resultlist = resultlist.concat(this.rows)
             console.log("rows: "+this.rows.length);
             console.log(data["response"].length);
             console.log(j);
