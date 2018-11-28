@@ -45,12 +45,13 @@
 
     <div class="container-fluid" style="padding:20px 100px 0px 100px">
         <div class = "form-group" >
-            <label for="usr">Login Name:</label>
+            <label for="usr" class="label">Login Name:</label>
             <input type = "text" class="form-control" id="usr" required [(ngModel)]="usr" name="usr">
-            <p>{{usr}}</p>
-            <label for="pwd">Password:</label>
+            <!-- <p>{{usr}}</p> -->
+            <p></p>
+            <label for="pwd" class="label">Password:</label>
             <input type="password" class="form-control" id="pwd" required [(ngModel)]="pwd" name="pwd">
-            <button *ngIf=usr type="submit" class="btn btn-md btn-primary" id="loginbtn" style="margin-top:10px" (click)=checkUserPass(usr,pwd)>Log In</button>
+            <button type="submit" class=" md-button" style="margin-top:10px" (click)=checkUserPass(usr,pwd)>Log In</button>
         </div>
 
 

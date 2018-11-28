@@ -38,6 +38,10 @@ export class LoginComponent implements OnInit {
   }
 
   checkUserPass(user: string, pass: string): boolean {
+    if(user == null || pass == null){
+      alert("Invalid username or password");
+      return;
+    }
     this.http.get('http://127.0.0.1:3300/checkUserPass/' + user + "/" + pass).subscribe(data => {
       console.log("data " + data);
       this.match = data["response"][0]["count(*)"] === 1;

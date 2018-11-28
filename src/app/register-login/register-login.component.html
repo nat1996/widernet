@@ -45,15 +45,15 @@
 
     <div class="container-fluid" style="padding:20px 100px 0px 100px">
         <div class = "form-group" >
-            <label for="usr">Login Name:</label>
-            <input type = "text" class="form-control" id="usr" required [(ngModel)]="usr" name="usr">
-            <p>{{usr}}</p>
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" required [(ngModel)]="pwd" name="pwd">
-            <label for="pwd2">Retype Password:</label>
-            <input type="password" class="form-control" id="pwd2" required [(ngModel)]="pwd2" name="pwd2">
-            <button type="submit" class="btn btn-md btn-primary" id="registerbtn" style="margin-top:10px" (click)="allow(usr, pwd, pwd2)">Register</button>
-            <button type="submit" class=" btn btn-md btn-primary" style="margin:10px 0px 0px 10px" id="loginpage" [routerLink]="['/login']">Login</button>
+            <label for="usr" class="label">Login Name:</label>
+            <input type = "text" class="form-control" style="margin-bottom:10px" id="usr" required [(ngModel)]="usr" name="usr">
+            <!-- <p>{{usr}}</p> -->
+            <label for="pwd" class="label">Password:</label>
+            <input type="password" class="form-control" style="margin-bottom:10px" id="pwd" required [(ngModel)]="pwd" name="pwd">
+            <label for="pwd2" class="label">Retype Password:</label>
+            <input type="password" class="form-control" style="margin-bottom:10px" id="pwd2" required [(ngModel)]="pwd2" name="pwd2">
+            <button type="submit" class="md-button" id="registerbtn" style="margin-top:10px" (click)="allow(usr, pwd, pwd2)">Register</button>
+            <button type="submit" class=" md-button"  id="loginpage" [routerLink]="['/login']">Login</button>
         </div>
 
 
