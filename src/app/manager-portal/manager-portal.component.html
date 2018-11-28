@@ -124,8 +124,11 @@
           <input type="submit" class=" btn btn-md btn-primary"  (click) = "sendEdit()" value="Submit">
           </form>
   </div>
-  <h2>Download Catalog Record Data as CSV file </h2>
-  <p><button (click)="clickEvent()"> Export to CSV </button></p>
+  <div class = "filter">
+    <h3>Download Catalog Record Data as CSV file </h3>
+    <button class="exportbtn" (click)="clickEvent()"> Export to CSV </button>
+    </div>
+  
 <!-- 
   <div class="well well-lg">
       Selected Row : <strong>{{selectedRow}}</strong>
