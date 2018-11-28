@@ -25,6 +25,8 @@
                     <b>
                       <img alt="eGranary Logo" height="38" src="../assets/eGranaryLogo.png" width="42"> eGranary </b></font><b><font size="5" color="#B7B9BB">User Portal</font>
                     </b>
+                    <b><button class="logoutbtn" (click)="logout()"> Logout </button></b>
+
                 </p>
 		          </td>
 	          </tr>
@@ -36,7 +38,22 @@
           </table>
                   <!-- end of Top bar with eGranary logo (which is old code) -->
   </div>
+  <div class="example-container mat-elevation-z8 filter">
+    <div>
+        <h3>Filter Options: </h3>
+        <label>None</label>
+        <input  class = "filterInput" name="options" ng-control="options" type="radio" value=0 [(ngModel)]="filter" (click)="reset()">
+        <label>Approved </label>
+        <input class = "filterInput" name="options" ng-control="options" type="checkbox" [value]="approved" [(ngModel)]="approved" >
+        <label>Pending </label>
+        <input class = "filterInput" name="options" ng-control="options" type="checkbox" [value]="pending" [(ngModel)]="pending" >
+        <label>Edit </label>
+        <input class = "filterInput" name="options" ng-control="options" type="checkbox" [value]="edit" [(ngModel)]="edited" >
+        <button type="button" (click)="filterStatus(approved,pending,edited)">Filter</button>
+    </div>
+    
 
+  </div>
 <div class="example-container mat-elevation-z8" >
     <div class="table-responsive">
        
@@ -45,7 +62,14 @@
                 <tr>
                   <th scope="col">Category</th>
                   <th scope="col">Resource</th>
-                  <th scope="col">Resource Type</th>
+                  <th>Resource Type
+                    <b *ngIf="tUp">
+                        <button type="button" class="glyphicon glyphicon-chevron-up" (click)="sortType(t)"></button>
+                    </b>
+                    <b *ngIf="!tUp">
+                        <button type="button" class="glyphicon glyphicon-chevron-down" (click)="sortType(t)"></button>
+                    </b>
+                  </th>
                   <th scope="col">Status</th>
                   <th scope="col">Comments</th>
                 </tr>

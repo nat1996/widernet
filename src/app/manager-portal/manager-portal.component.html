@@ -25,6 +25,7 @@
                     <b>
                       <img alt="eGranary Logo" height="38" src="../assets/eGranaryLogo.png" width="42"> eGranary </b></font><b><font size="5" color="#B7B9BB">Manager Portal</font>
                     </b>
+                    <b><button class="logoutbtn" (click)="logout()"> Logout </button></b>
                 </p>
 		          </td>
 	          </tr>
@@ -41,7 +42,7 @@
     <div>
         <h3>Filter Options: </h3>
         <label>None</label>
-        <input  class = "filterInput" name="options" ng-control="options" type="radio" value=0 [(ngModel)]="filter" >
+        <input  class = "filterInput" name="options" ng-control="options" type="radio" value=0 [(ngModel)]="filter" (click)="reset()">
         <label>Category </label>
         <input class = "filterInput" name="options" ng-control="options" type="radio" value=1 [(ngModel)]="filter" >
         <label>Status </label>
@@ -65,14 +66,28 @@
   </div>
 </div>
   <div class="example-container mat-elevation-z8">
-  <div class="table-responsive">
-  <table class="table table-hover">
+  <!-- <div class="table-responsive"> -->
+  <table class="table table-responsive table-hover">
     <thead class="thead-light ">
-        <th>User<button type="button" class="glyphicon glyphicon-sort" (click)="sortUser(u)"></button></th>
+        <th class = "width">User
+          <b *ngIf="uUp">
+              <button type="button" class="glyphicon glyphicon-chevron-up" (click)="sortUser(u)"></button>
+          </b>
+          <b *ngIf="!uUp">
+              <button type="button" class="glyphicon glyphicon-chevron-down" (click)="sortUser(u)"></button>
+          </b>
+        </th>
         <th>Category</th>
         <th>Resource</th>
-        <th>Resource Type<button type="button" class="glyphicon glyphicon-sort" (click)="sortType(t)"></button></th>
-        <th>Status<button type="button" class="glyphicon glyphicon-sort"></button></th>
+        <th>Resource Type
+          <b *ngIf="tUp">
+              <button type="button" class="glyphicon glyphicon-chevron-up" (click)="sortType(t)"></button>
+          </b>
+          <b *ngIf="!tUp">
+              <button type="button" class="glyphicon glyphicon-chevron-down" (click)="sortType(t)"></button>
+          </b>
+        </th>
+        <th>Status</th>
         <th>Approve</th>
         <th>Edit</th>
     </thead>
@@ -92,11 +107,12 @@
       </tr>
     </tbody>
   </table>
-  </div>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <!-- <mat-paginator class="filter" style="padding:0 0 0 0" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+
+  <!-- </div> -->
   
   <div class="edit" *ngIf="edit"> 
-      <p>Which item needs to be fixed?</p>
+      <p style="font-weight: bold">Which item needs to be fixed?</p>
       <div *ngFor="let object of items">
           <input type="checkbox" [(ngModel)]="issues"> {{object}}<br>
       </div>

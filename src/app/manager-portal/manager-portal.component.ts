@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-
+import { Router } from '@angular/router';
 import { IdLinkService } from '../id-link.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -41,6 +41,9 @@ export class ManagerPortalComponent implements OnInit {
   r = false;
   t = false;
 
+  uUp = false;
+  tUp = false;
+
   approved = false;
   pending = false;
   edited = false;
@@ -49,7 +52,7 @@ export class ManagerPortalComponent implements OnInit {
 
   categoryFilter = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private linkService: IdLinkService, private location: Location) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private linkService: IdLinkService, private location: Location, private router: Router) { }
 
 
   ngOnInit() {
@@ -116,7 +119,8 @@ export class ManagerPortalComponent implements OnInit {
     x = selectedItem.Category;
     this.items = x.split(", ");
     this.linkService.setItems(this.items);
-    this.edit = true;
+    if(this.edit == false){this.edit = true}
+    else if(this.edit == true){this.edit = false};
     //Resets the comments to empty string
     this.comments = '';
     this.linkService.setResource(selectedItem.URL);
@@ -136,7 +140,12 @@ export class ManagerPortalComponent implements OnInit {
   }
 
   filterCategory(f: string): void {
+    this.result = this.result2;
     this.result = this.result2.filter(x => x.Category.includes(f));
+  }
+
+  reset(): void {
+    this.result = this.result2;
   }
 
   filterStatus(a: boolean, p: boolean, e: boolean): void {
@@ -186,6 +195,7 @@ export class ManagerPortalComponent implements OnInit {
     let userUnsorted: Array<CatDetails> = this.result;
     let userSorted: Array<CatDetails> = this.result;
     this.u = !this.u;
+    this.uUp = !this.uUp;
     if (asc) {
       // tslint:disable-next-line:prefer-const
       userSorted = userUnsorted.sort(this.userCompareASC);
@@ -218,6 +228,7 @@ export class ManagerPortalComponent implements OnInit {
     let userUnsorted: Array<CatDetails> = this.result;
     let userSorted: Array<CatDetails> = this.result;
     this.t = !this.t;
+    this.tUp = !this.tUp;
     if (asc) {
       // tslint:disable-next-line:prefer-const
       userSorted = userUnsorted.sort(this.typeCompareASC);
@@ -293,40 +304,125 @@ export class ManagerPortalComponent implements OnInit {
   title = 'eGranary';
   clickEvent(){
     console.log("click event triggered");
-             
-              this.http.get('http://127.0.0.1:3300/getCatDetails/natharris').subscribe(data => {
-                  this.rows = data["response"];
-                  console.log(this.rows);
-                  const options = {
-                    fieldSeparator: ',',
-                    quoteStrings: '"',
-                    decimalseparator: '.',
-                    showLabels: true,
-                        showTitle: true,
-                        title: 'Catalog Records',
-                        useBom: true,
-                        useKeysAsHeaders: true,
-                        // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
-                      };
-                      const csvExporter = new ExportToCsv(options);
-  
-                  csvExporter.generateCsv(data["response"]);
-                  alert("Catalog Record Saved Successfully");
+    let resultlist :Object[] = [];
+    let v = true;
+    this.http.get('http://127.0.0.1:3300/managerUsers/gb').subscribe(data =>{
+      //console.log(data);
+      for(let j=0; j<data["response"].length;j++){
+        // if(data["response"][j]["UserName"]=="" || data["response"][j]["UserName"]==""){
+        //   continue;
+        // }
 
-              });
+        let fieldUsers = data["response"][j]["UserName"]
+        let val: boolean = false;
+        this.http.get('http://127.0.0.1:3300/getCatDetails/' + fieldUsers).subscribe(d =>{
+          //console.log(d);
+          for(let w of d){
+            if((d["response"].length != 0){
+
+            }
+          };
+          if(d["response"].length != 0){
+            console.log(d["response"]);
+            
+
+            this.rows = d["response"]
+            resultlist = resultlist.concat(this.rows)
+            console.log("rows: "+this.rows.length);
+            console.log(data["response"].length);
+            console.log(j);
+            console.log(resultlist);
+            // if(v == data["response"].length-1){
+            //   alert('www')
+            // }
+            const options = {
+              fieldSeparator: ',',
+              quoteStrings: '"',
+              decimalseparator: '.',
+              showLabels: true,
+                  showTitle: true,
+                  title: 'Catalog Records',
+                  useBom: true,
+                  useKeysAsHeaders: true,
+                  // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+                };
+            //if(v){
+              v= false;
+              const csvExporter = new ExportToCsv(options);
+      
+              csvExporter.generateCsv(resultlist);
+              alert("Catalog Record Saved Successfully");
+            //}
+            
+
+            // this.obs = d["response"];
+            // for (let i: number = 0; i < this.obs.length; i++) {
+            //   val = false;
+            //   for(let j: number = 0; j < this.result.length; j++) {
+            //     if (this.result[j].getURL() === this.obs[i]["URL"]) {
+            //       this.result[j].setCategory(this.result[j].getCategory() + ", " + this.obs[i]["Category"]);
+            //       val = true;
+            //     }
+            //   }
+            //   if(val === true) {
+            //     continue;
+            //   }
+            //   let c: CatDetails = new CatDetails();
+            //   c.setCategory(this.obs[i]["Category"]);
+            //   c.setLastReviewBy(this.obs[i]["LastReviewBy"]);
+            //   c.setType(this.obs[i]["Type"]);
+              
+            //   c.setURL(this.obs[i]["URL"]);
+            //   c.setUser(this.obs[i]["User"]);
+            //   resultlist.push()
+
+
+
+          }       
+
+
+
+        });
+        
+        
+      };
+
+      
+    });
+
+    //this.http.get('http://127.0.0.1:3300/getCatDetails/' + this.user).subscribe(data => {
+                  //this.rows = data["response"];
+                  //console.log(this.rows);
+                  //const options = {
+                    //fieldSeparator: ',',
+                    //quoteStrings: '"',
+                    //decimalseparator: '.',
+                    //showLabels: true,
+                        //showTitle: true,
+                        //title: 'Catalog Records',
+                        //useBom: true,
+                        //useKeysAsHeaders: true,
+                        // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+                      //};
+                      //const csvExporter = new ExportToCsv(options);
+  
+                  //csvExporter.generateCsv(data["response"]);
+                  //alert("Catalog Record Saved Successfully");
+
+              //});
               // this.rows.push(data)
-              var data2 = [
-                {
-                  User2: "Cataloger1"
-                },
-                {
-                  User2: "Cataloger1"
-                },
-                {
-                  User2: "Cataloger1"
-                },
-              ];
-                console.log(data2);
+              // var data2 = [
+              //   {
+              //     User2: "Cataloger1"
+              //   },
+              //   {
+              //     User2: "Cataloger1"
+              //   },
+              //   {
+              //     User2: "Cataloger1"
+              //   },
+              // ];
+              //   console.log(data2);
                 // //this.rows=data2;
                 // const options = {
                 //   fieldSeparator: ',',
@@ -404,6 +500,10 @@ export class ManagerPortalComponent implements OnInit {
     // });
   
     return true;
+  }
+  logout(){
+    this.router.navigate(['/login']);
+    
   }
 
 }

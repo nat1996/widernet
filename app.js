@@ -34,12 +34,6 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 
 
-
-
-
-
-
-
 var dbserver = app.listen(3300, "127.0.0.1", function () {
  
     var host = dbserver.address().address
@@ -50,42 +44,137 @@ var dbserver = app.listen(3300, "127.0.0.1", function () {
 });
 
 
+// // ------------------------------------------------------START OF LDAP SERVER-----------------------------------------------------------
+
+// // constructor(props) {
+// //   super(props)
+// //   this.state = { loggedin: false }
+// //   this.login()
+// // }
+// var app2 = express();
+ 
+// passport.use(new LdapStrategy(OPTS));//will need to change since I do not know the 
+ 
+// app2.use(bodyParser.json());
+// app2.use(bodyParser.urlencoded({extended: false}));
+// app2.use(passport.initialize());
+
+// var getLDAPConfiguration = function (req, callback) {
+//   process.nextTick(function () {
+//     var opts = {
+//       server: {
+//         url: 'ldap://localhost:10389',
+//         bindDn: `uid=${req.params.user},Ou=Users`,
+//         bindCredentials: `${req.params.pass}`,
+//         searchBase: 'Ou=Users',
+//         searchFilter: `uid=${req.params.user}`,
+//         reconnect: true
+//       }
+//     };
+//     callback(null, opts);
+//   });
+// };
+// passport.serializeUser(function (user, done) {
+//   done(null, user.uid)
+// })
+// passport.deserializeUser(function (id, done) {
+//   User.findOne({ uid: id }).exec()
+//     .then(user => {
+//       if (!user) {
+//         done(new Error(`Cannot find user with uid=${id}`))
+//       } else {
+//         done(null, user)
+//       }
+//     })
+// })
+// passport.myLogin = function (req, res, next) {
+//   passport.authenticate('ldapauth', function (err, user, info) {
+//     if (err) {
+//       return next(err)
+//     }
+//     if (!user) {
+//       res.status(401).json({ success: false, message: 'authentication failed' })
+//     } else {
+//       req.login(user, loginErr => {
+//         if (loginErr) {
+//           return next(loginErr);
+//         }
+//         User.findOneAndUpdate({uid: user.uid}, user, {upsert: true, new: true}).exec().then(user=> {
+//           return res.json({ success: true, message: 'authentication succeeded', user: Object.assign({name: user.uid}, user) });
+//         })
+//       });
+//     }
+//   })(req, res, next)
+// }
+// login = (credentials) => {
+//   if (credentials) {
+//     var path = `${apiPath}/login`
+//     var options = {
+//       // have to have this to allow cookie to be sent to server. Therefore authentication session can be reserved.
+//       credentials: 'same-origin',
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(credentials)
+//     }
+//   } else {
+//     path = `${apiPath}/api/user`
+//     options = { credentials: 'same-origin' }
+//   }
+//   fetch(path, options)
+//     .then(response => {
+//       if (response.status >= 200 && response.status < 300) {
+//         return response.json()
+//       } else {
+//         var error = new Error(response.statusText)
+//         error.response = response
+//         throw error
+//       }
+//     })
+//     .then(login => {
+//       this.setState({ loggedin: login.success, user: login.user})
+//     })
+// }
+
+// // passport.use(new LdapStrategy(Opts)
+// //   function (user, done) {
+// //     winston.info("LDAP user ", user.displayName, "is logged in.")
+// //     return done(null, user);
+// //   }))
 
 
+// // var OPTS = {
+// //   server: {
+// //      url: 'ldap://localhost:10389',
+// //     // bindDN: 'cn=root',
+// //     // bindCredentials: 'secret',
+// //     // searchBase: 'ou=Users',
+// //     // searchFilter: '(uid={{username}})'
+// //     bindDn: `uid=${req.body.username},Ou=Users`,
+// //     bindCredentials: `${req.body.password}`,
+// //     searchBase: 'Ou=Users',
+// //     searchFilter: `uid=${req.body.username}`,
+// //     reconnect: true
+// //   }
+// // };
+ 
 
+ 
+// // app2.post('/login', passport.authenticate('ldapauth', {session: false}), function(req, res) {
+// //   res.send({status: 'ok'});
+// // });
+ 
+// // var ldapserver = app2.listen(4300, "127.0.0.1", function () {
+ 
+// //   var host = ldapserver.address().address
+// //   var port = ldapserver.address().port
+// //  //"https://powerful-harbor-88011.herokuapp.com/" +
+// //   console.log("LdapServer app listening at http://%s:%s", host, port)
+ 
+// // });
 
-var OPTS = {
-  server: {
-    url: 'ldap://localhost:10389',
-    bindDN: 'cn=root',
-    bindCredentials: 'secret',
-    searchBase: 'ou=Users',
-    searchFilter: '(uid={{username}})'
-  }
-};
- 
-var app2 = express();
- 
-passport.use(new LdapStrategy(OPTS));
- 
-app2.use(bodyParser.json());
-app2.use(bodyParser.urlencoded({extended: false}));
-app2.use(passport.initialize());
- 
-// app2.post('/login', passport.authenticate('ldapauth', {session: false}), function(req, res) {
-//   res.send({status: 'ok'});
-// });
- 
-var ldapserver = app2.listen(4300, "127.0.0.1", function () {
- 
-  var host = ldapserver.address().address
-  var port = ldapserver.address().port
- //"https://powerful-harbor-88011.herokuapp.com/" +
-  console.log("LdapServer app listening at http://%s:%s", host, port)
- 
-});
-
-
+// // --------------------------------------------------------END OF LDAP SERVER---------------------------------------------------------------------
 
 
 
@@ -207,9 +296,9 @@ app.get('/getCategory/:id', function(req, res, next) {
 });
 
 //get catalog record data
-app.get('/getCatRec/', function(req, res, next) {
-  // var Manager = req.params.user;
-	connection.query("select R.User, R.URL, R.Type, R.LastReviewBy, C.Category from test.rp R inner join test.lkupegcategories C on R.CategoryID=C.eGCategoryID where LastReviewBy='approved'", function (error, results) {
+app.get('/getCatRec/:user', function(req, res, next) {
+   var Manager = req.params.user;
+	connection.query("select R.Comments, R.User, R.URL, R.Type, R.LastReviewBy, C.Category from test.rp R inner join test.lkupegcategories C on R.CategoryID=C.eGCategoryID where LastReviewBy='approved' and User=?", [Manager], function (error, results) {
         if (error) throw error;
   console.log(results);
      res.end(JSON.stringify({"status": 200, "error": null, "response": results}));

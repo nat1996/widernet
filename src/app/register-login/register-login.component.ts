@@ -31,6 +31,9 @@ export class RegisterLoginComponent implements OnInit {
       'Content-Type' : 'application/json'
     })
   };
+  logout(){
+    alert("logged out!")
+  }
 
   constructor(private http: HttpClient, private route: Router) { }
 
