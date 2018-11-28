@@ -91,17 +91,18 @@ label {
 
 
 h3 {
-    font-size: inherit;
-    font-weight: bold;
-    display: inline;
-    margin-right: 20px;
-  }
+  font-size: inherit;
+  font-weight: bold;
+  display: inline;
+  margin-right: 20px;
+}
 
-  .filterInput {
-    padding-right: 20px;
-    margin-right: 20px;
-    display: inline;
-  }
+.filterInput {
+  margin-left: 5px; 
+  padding-right: 20px;
+  margin-right: 20px;
+  display: inline;
+}
 
 /* button {
 	color:#808080;

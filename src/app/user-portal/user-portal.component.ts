@@ -71,7 +71,16 @@ export class UserPortalComponent implements OnInit {
     this.http.get('http://127.0.0.1:3300/getCatDetails/' + user).subscribe(data => {
       this.obs = data["response"];
       for (let i: number = 0; i < this.obs.length; i++) {
-
+        val = false;
+        for(let j: number = 0; j < this.result.length; j++) {
+          if (this.result[j].getURL() === this.obs[i]["URL"]) {
+            this.result[j].setCategory(this.result[j].getCategory() + ", " + this.obs[i]["Category"]);
+            val = true;
+          }
+        }
+        if(val === true) {
+          continue;
+        }
         let c: CatDetails = new CatDetails();
         c.setCategory(this.obs[i]["Category"]);
         c.setLastReviewBy(this.obs[i]["LastReviewBy"]);
@@ -83,7 +92,7 @@ export class UserPortalComponent implements OnInit {
         //let cat: string = this.getCategory(x);
         //console.log("cat=" + cat);
         //c.setCategory(cat);
-        this.result[i] = c;
+        this.result.push(c);
       }
     
       console.log(this.result);
