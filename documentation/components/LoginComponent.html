@@ -767,6 +767,10 @@ export class LoginComponent implements OnInit {
   }
 
   checkUserPass(user: string, pass: string): boolean {
+    if(user &#x3D;&#x3D; null || pass &#x3D;&#x3D; null){
+      alert(&quot;Invalid username or password&quot;);
+      return;
+    }
     this.http.get(&#x27;http://127.0.0.1:3300/checkUserPass/&#x27; + user + &quot;/&quot; + pass).subscribe(data &#x3D;&gt; {
       console.log(&quot;data &quot; + data);
       this.match &#x3D; data[&quot;response&quot;][0][&quot;count(*)&quot;] &#x3D;&#x3D;&#x3D; 1;
@@ -777,7 +781,7 @@ export class LoginComponent implements OnInit {
       } else {
         console.log(&quot;allow&quot;);
         this.setName(user);
-        this.route.navigate([&#x27;/userDetail/&#x27; + this.usr]);
+        this.route.navigate([&#x27;/userDetail/&#x27; + this.usr], {skipLocationChange: true});
       }
       
       return this.match;
@@ -859,12 +863,13 @@ export class LoginComponent implements OnInit {
 
     &lt;div class&#x3D;&quot;container-fluid&quot; style&#x3D;&quot;padding:20px 100px 0px 100px&quot;&gt;
         &lt;div class &#x3D; &quot;form-group&quot; &gt;
-            &lt;label for&#x3D;&quot;usr&quot;&gt;Login Name:&lt;/label&gt;
+            &lt;label for&#x3D;&quot;usr&quot; class&#x3D;&quot;label&quot;&gt;Login Name:&lt;/label&gt;
             &lt;input type &#x3D; &quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;usr&quot; required [(ngModel)]&#x3D;&quot;usr&quot; name&#x3D;&quot;usr&quot;&gt;
-            &lt;p&gt;{{usr}}&lt;/p&gt;
-            &lt;label for&#x3D;&quot;pwd&quot;&gt;Password:&lt;/label&gt;
+            &lt;!-- &lt;p&gt;{{usr}}&lt;/p&gt; --&gt;
+            &lt;p&gt;&lt;/p&gt;
+            &lt;label for&#x3D;&quot;pwd&quot; class&#x3D;&quot;label&quot;&gt;Password:&lt;/label&gt;
             &lt;input type&#x3D;&quot;password&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;pwd&quot; required [(ngModel)]&#x3D;&quot;pwd&quot; name&#x3D;&quot;pwd&quot;&gt;
-            &lt;button *ngIf&#x3D;usr type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-md btn-primary&quot; id&#x3D;&quot;loginbtn&quot; style&#x3D;&quot;margin-top:10px&quot; (click)&#x3D;checkUserPass(usr,pwd)&gt;Log In&lt;/button&gt;
+            &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot; md-button&quot; style&#x3D;&quot;margin-top:10px&quot; (click)&#x3D;checkUserPass(usr,pwd)&gt;Log In&lt;/button&gt;
         &lt;/div&gt;
 
 
@@ -879,7 +884,40 @@ export class LoginComponent implements OnInit {
                 <p class="comment">
                     <code>./login.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">.md-button {
+    color : currentColor;
+  }
+  
+  .md-button:not([disabled]):hover {
+    background-color: rgba(158, 158, 158, 0.8);
+  }
+  
+  .md-button[disabled] {
+    color : rgba(0, 0, 0, 0.26);
+    background-color: transparent;
+  }
+  .md-button {
+    background-color: rgba(158, 158, 158, 0.2); 
+    padding: 0 6px 0 6px;
+    margin: 6px 8px 6px 8px;
+    min-width: 88px;
+    border-radius: 3px;
+    font-size: 14px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration:none;
+    border: none;
+    outline: none;
+  }
+  .label{
+      font-size: 10pt;
+      font-weight: bold;
+      color: black;
+      margin-bottom: 5pt;
+  }
+  /* #usr {
+      margin-bottom: 5px;
+  } */</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -907,8 +945,8 @@ export class LoginComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><html><head><meta http-equiv="Content-Language" content="en-us"><meta http-equiv="Content-Type" content="text/html; charset=utf8"><script src="./jquery-2.2.2.js" type="text/javascript"></script><script src="./register.js" type="text/javascript"></script><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"><title>WiderNet Register Portal</title><!--<link href="Wdefault.css" rel="stylesheet" type="text/css" title="Original">--><meta http-equiv="Default-Style" content="CustomA"> <!-- Sets the stylesheet to be used. --></head><body>  <p>{{data}}</p>  <div align="center">      <div align="center">            <table border="0" width="80%" cellpadding="0" style="border-collapse: collapse" id="table4">	          <tr>		          <td>		            <p style="margin-top: 0; margin-bottom: 0">		              <font size="5" face="Verdana" color="#B7B9BB">                    <b>                      <img alt="eGranary Logo" height="38" src="../assets/eGranaryLogo.png" width="42"> eGranary </b></font><b><font size="5" color="#B7B9BB">User Portal</font>                    </b>                </p>		          </td>	          </tr>	          <tr>		          <td colspan="2">                <hr noshade color="#4D4A43" size="3">              </td>	          </tr>          </table>              </div>  </div>  <p>&nbsp;</p>    <div class="container-fluid" style="padding:20px 100px 0px 100px">        <div class = "form-group" >            <label for="usr">Login Name:</label>            <input type = "text" class="form-control" id="usr" required [(ngModel)]="usr" name="usr">            <p>{{usr}}</p>            <label for="pwd">Password:</label>            <input type="password" class="form-control" id="pwd" required [(ngModel)]="pwd" name="pwd">            <button *ngIf=usr type="submit" class="btn btn-md btn-primary" id="loginbtn" style="margin-top:10px" (click)=checkUserPass(usr,pwd)>Log In</button>        </div>    </div></body></html></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManagerFilterComponent', 'selector': 'app-manager-filter'},{'name': 'ManagerLoginComponent', 'selector': 'app-manager-login'},{'name': 'ManagerPortalComponent', 'selector': 'app-manager-portal'},{'name': 'ManagerRegisterComponent', 'selector': 'app-manager-register'},{'name': 'RegisterLoginComponent', 'selector': 'app-register-login'},{'name': 'UserPortalComponent', 'selector': 'app-user-portal'}];
+        var COMPONENT_TEMPLATE = '<div><html><head><meta http-equiv="Content-Language" content="en-us"><meta http-equiv="Content-Type" content="text/html; charset=utf8"><script src="./jquery-2.2.2.js" type="text/javascript"></script><script src="./register.js" type="text/javascript"></script><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"><title>WiderNet Register Portal</title><!--<link href="Wdefault.css" rel="stylesheet" type="text/css" title="Original">--><meta http-equiv="Default-Style" content="CustomA"> <!-- Sets the stylesheet to be used. --></head><body>  <p>{{data}}</p>  <div align="center">      <div align="center">            <table border="0" width="80%" cellpadding="0" style="border-collapse: collapse" id="table4">	          <tr>		          <td>		            <p style="margin-top: 0; margin-bottom: 0">		              <font size="5" face="Verdana" color="#B7B9BB">                    <b>                      <img alt="eGranary Logo" height="38" src="../assets/eGranaryLogo.png" width="42"> eGranary </b></font><b><font size="5" color="#B7B9BB">User Portal</font>                    </b>                </p>		          </td>	          </tr>	          <tr>		          <td colspan="2">                <hr noshade color="#4D4A43" size="3">              </td>	          </tr>          </table>              </div>  </div>  <p>&nbsp;</p>    <div class="container-fluid" style="padding:20px 100px 0px 100px">        <div class = "form-group" >            <label for="usr" class="label">Login Name:</label>            <input type = "text" class="form-control" id="usr" required [(ngModel)]="usr" name="usr">            <!-- <p>{{usr}}</p> -->            <p></p>            <label for="pwd" class="label">Password:</label>            <input type="password" class="form-control" id="pwd" required [(ngModel)]="pwd" name="pwd">            <button type="submit" class=" md-button" style="margin-top:10px" (click)=checkUserPass(usr,pwd)>Log In</button>        </div>    </div></body></html></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManagerFilterComponent', 'selector': 'app-manager-filter'},{'name': 'ManagerLoginComponent', 'selector': 'app-manager-login'},{'name': 'ManagerPortalComponent', 'selector': 'app-manager-portal'},{'name': 'ManagerRegisterComponent', 'selector': 'app-manager-register'},{'name': 'RegisterLoginComponent', 'selector': 'app-register-login'},{'name': 'TestComponent', 'selector': 'app-test'},{'name': 'UserPortalComponent', 'selector': 'app-user-portal'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoginComponent'};
 </script>

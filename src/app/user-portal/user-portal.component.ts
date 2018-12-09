@@ -53,7 +53,10 @@ export class UserPortalComponent implements OnInit {
     this.user = this.linkService.getName();
         
   }
-
+  filterCategory(f: string): void {
+    this.result = this.result2;
+    this.result = this.result2.filter(x => x.Category.toLowerCase().includes(f.toLowerCase()));
+  }
   getCategory(id: number): string {
     this.http.get('http://127.0.0.1:3300/getCategory/' + id).subscribe(data => {
       console.log(data["response"][0]["Category"]);
@@ -87,6 +90,9 @@ export class UserPortalComponent implements OnInit {
         c.setType(this.obs[i]["Type"]);
         c.setURL(this.obs[i]["URL"]);
         c.setComments(this.obs[i]["Comments"]);
+        c.setDate(this.obs[i]["LastEditDate"]);
+        c.setshortDate(this.obs[i]["LastEditDate"]);
+
         //let x: number = this.obs[i]["CategoryID"];
         //console.log("x=" + x);
         //let cat: string = this.getCategory(x);
@@ -134,8 +140,8 @@ export class UserPortalComponent implements OnInit {
           this.result = this.result2.filter(x => !x.LastReviewBy.includes('approved') &&
           !x.LastReviewBy.includes('pending') || x.LastReviewBy.includes('edit'));
         } else {
-          this.result = this.result2.filter(x => !x.LastReviewBy.includes('approved') &&
-          !x.LastReviewBy.includes('pending') && !x.LastReviewBy.includes('edit'));
+          this.result = this.result2.filter(x => x.LastReviewBy.includes('approved') ||
+          x.LastReviewBy.includes('pending') || x.LastReviewBy.includes('edit'));
         }
       }
 
@@ -167,7 +173,46 @@ export class UserPortalComponent implements OnInit {
     this.result = userSorted;
 
   }
-
+private userCompareASC(a, b) {
+  if (a.User.toLowerCase() < b.User.toLowerCase()) {
+    return -1;
+  }
+  if (a.User.toLowerCase() > b.User.toLowerCase()) {
+    return 1;
+  }
+  return 0;
+  }
+  
+  private userCompareDESC(a, b) {
+    if (a.User.toLowerCase() > b.User.toLowerCase()) {
+    return -1;
+    }
+    if (a.User.toLowerCase() < b.User.toLowerCase()) {
+    return 1;
+    }
+    return 0;
+  }
+  
+  private resourceCompareASC(a, b) {
+    if (a.URL.toLowerCase() < b.URL.toLowerCase()) {
+    return -1;
+    }
+    if (a.URL.toLowerCase() > b.URL.toLowerCase()) {
+    return 1;
+    }
+    return 0;
+  }
+  
+  private resourceCompareDESC(a, b) {
+    if (a.URL.toLowerCase() > b.URL.toLowerCase()) {
+      return -1;
+    }
+    if (a.URL.toLowerCase() < b.URL.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+    }
+    
   private typeCompareASC(a, b) {
     if (a.Type.toLowerCase() < b.Type.toLowerCase()) {
      return -1;
@@ -207,6 +252,8 @@ class CatDetails {
   Type: string;
   Category: string;
   Comments: string;
+  Date: string;
+  shortDate: string;
 
   public CatDetails() {
       this.URL = '';
@@ -215,6 +262,8 @@ class CatDetails {
       this.Type = '';
       this.Category = '';
       this.Comments = '';
+      this.Date = '';
+      this.shortDate = '';
   }
 
   public getComments(): string {
@@ -231,6 +280,26 @@ class CatDetails {
 
   public setURL(url: string): void {
       this.URL = url;
+  }
+  public getDate(): string {
+    return this.Date;
+  }
+
+  public setDate(date: string): void {
+    this.Date =  date;
+    
+  }
+  public getshortDate(): string {
+    return this.shortDate;
+  }
+
+  public setshortDate(date: string): void {
+    this.shortDate = date.slice(0,10);
+    var year = date.slice(0,4);
+    var day = date.slice(5,7);
+    var month = date.slice(8,10);
+    this.shortDate = day + "-" + month + "-" + year;
+
   }
 
   public getLastReview(): string {
@@ -264,4 +333,5 @@ class CatDetails {
 public setCategory(Category: string): void {
     this.Category = Category;
 }
+
 }

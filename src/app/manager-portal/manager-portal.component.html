@@ -52,6 +52,7 @@
         <label>Filter Category</label>
         <input class = "typeShort" type="text" name="catFilter" id="catFilter" [(ngModel)]="categoryFilter" [value]="serial" class="form-control">
         <button type="button" (click)="filterCategory(categoryFilter)">Filter</button>
+        <!-- fix to make it not case sensitive -->
         
     </div>
     <div *ngIf="filter=='2'">
@@ -78,7 +79,8 @@
           </b>
         </th>
         <th>Category</th>
-        <th>Resource</th>
+        <th class="url">Resource</th>
+        <th class="dateWidth">Date Created</th>
         <th>Resource Type
           <b *ngIf="tUp">
               <button type="button" class="glyphicon glyphicon-chevron-up" (click)="sortType(t)"></button>
@@ -95,7 +97,8 @@
       <tr *ngFor="let x of result; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
         <td>{{x.User}}</td>
         <td>{{x.Category}}</td>
-        <td><a href="{{x.URL}}">{{x.URL}}</a></td>
+        <td class="url"><a href="{{x.URL}}">{{x.URL}}</a></td>
+        <td class="dateWidth">{{x.shortDate}}</td>
         <td>{{x.Type}}</td>
         <td>{{x.LastReviewBy}}</td>
         <td>

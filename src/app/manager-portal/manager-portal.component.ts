@@ -141,7 +141,7 @@ export class ManagerPortalComponent implements OnInit {
 
   filterCategory(f: string): void {
     this.result = this.result2;
-    this.result = this.result2.filter(x => x.Category.includes(f));
+    this.result = this.result2.filter(x => x.Category.toLowerCase().includes(f.toLowerCase()));
   }
 
   reset(): void {
@@ -181,8 +181,8 @@ export class ManagerPortalComponent implements OnInit {
           this.result = this.result2.filter(x => !x.LastReviewBy.includes('approved') &&
           !x.LastReviewBy.includes('pending') || x.LastReviewBy.includes('edit'));
         } else {
-          this.result = this.result2.filter(x => !x.LastReviewBy.includes('approved') &&
-          !x.LastReviewBy.includes('pending') && !x.LastReviewBy.includes('edit'));
+          this.result = this.result2.filter(x => x.LastReviewBy.includes('approved') ||
+          x.LastReviewBy.includes('pending') || x.LastReviewBy.includes('edit'));
         }
       }
 
@@ -304,9 +304,10 @@ export class ManagerPortalComponent implements OnInit {
   title = 'eGranary';
   clickEvent(){
     console.log("click event triggered");
+    this.user = this.route.snapshot.params.user;
     let resultlist :Object[] = [];
     let v = true;
-    this.http.get('http://127.0.0.1:3300/managerUsers/gb').subscribe(data =>{
+    this.http.get('http://127.0.0.1:3300/managerUsers/'+ this.user).subscribe(data =>{
       //console.log(data);
       for(let j=0; j<data["response"].length;j++){
         // if(data["response"][j]["UserName"]=="" || data["response"][j]["UserName"]==""){
@@ -333,49 +334,7 @@ export class ManagerPortalComponent implements OnInit {
             console.log(data["response"].length);
             console.log(j);
             console.log(resultlist);
-            // if(v == data["response"].length-1){
-            //   alert('www')
-            // }
-            // const options = {
-            //   fieldSeparator: ',',
-            //   quoteStrings: '"',
-            //   decimalseparator: '.',
-            //   showLabels: true,
-            //       showTitle: true,
-            //       title: 'Catalog Records',
-            //       useBom: true,
-            //       useKeysAsHeaders: true,
-            //       // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
-            //     };
-            // //if(v){
-            //   v= false;
-            //   const csvExporter = new ExportToCsv(options);
-      
-            //   csvExporter.generateCsv(resultlist);
-            //   alert("Catalog Record Saved Successfully");
-            //}
             
-
-            // this.obs = d["response"];
-            // for (let i: number = 0; i < this.obs.length; i++) {
-            //   val = false;
-            //   for(let j: number = 0; j < this.result.length; j++) {
-            //     if (this.result[j].getURL() === this.obs[i]["URL"]) {
-            //       this.result[j].setCategory(this.result[j].getCategory() + ", " + this.obs[i]["Category"]);
-            //       val = true;
-            //     }
-            //   }
-            //   if(val === true) {
-            //     continue;
-            //   }
-            //   let c: CatDetails = new CatDetails();
-            //   c.setCategory(this.obs[i]["Category"]);
-            //   c.setLastReviewBy(this.obs[i]["LastReviewBy"]);
-            //   c.setType(this.obs[i]["Type"]);
-              
-            //   c.setURL(this.obs[i]["URL"]);
-            //   c.setUser(this.obs[i]["User"]);
-            //   resultlist.push()
 
 
 
@@ -409,61 +368,15 @@ export class ManagerPortalComponent implements OnInit {
 
         csvExporter.generateCsv(resultlist);
       console.log(resultlist);
+      this.http.post('http://127.0.0.1:3300/addSent', this.httpOptions).subscribe( data => {
+      console.log("send sent");
+    })
     },
     1000);
  
     
 
-    //this.http.get('http://127.0.0.1:3300/getCatDetails/' + this.user).subscribe(data => {
-                  //this.rows = data["response"];
-                  //console.log(this.rows);
-                  //const options = {
-                    //fieldSeparator: ',',
-                    //quoteStrings: '"',
-                    //decimalseparator: '.',
-                    //showLabels: true,
-                        //showTitle: true,
-                        //title: 'Catalog Records',
-                        //useBom: true,
-                        //useKeysAsHeaders: true,
-                        // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
-                      //};
-                      //const csvExporter = new ExportToCsv(options);
-  
-                  //csvExporter.generateCsv(data["response"]);
-                  //alert("Catalog Record Saved Successfully");
-
-              //});
-              // this.rows.push(data)
-              // var data2 = [
-              //   {
-              //     User2: "Cataloger1"
-              //   },
-              //   {
-              //     User2: "Cataloger1"
-              //   },
-              //   {
-              //     User2: "Cataloger1"
-              //   },
-              // ];
-              //   console.log(data2);
-                // //this.rows=data2;
-                // const options = {
-                //   fieldSeparator: ',',
-                //   quoteStrings: '"',
-                //   decimalseparator: '.',
-                //   showLabels: true,
-                //       showTitle: true,
-                //       title: 'Catalog Records',
-                //       useBom: true,
-                //       useKeysAsHeaders: true,
-                //       // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
-                //     };
-                //     const csvExporter = new ExportToCsv(options);
-
-                    //csvExporter.generateCsv(data2);
-                    
-                    //alert(this.test);
+    
                }
 
 
@@ -491,10 +404,14 @@ export class ManagerPortalComponent implements OnInit {
             c.setCategory(this.obs[i]["Category"]);
             c.setLastReviewBy(this.obs[i]["LastReviewBy"]);
             c.setType(this.obs[i]["Type"]);
-            
             c.setURL(this.obs[i]["URL"]);
             c.setUser(this.obs[i]["User"]);
-            this.result.push(c);
+            c.setDate(this.obs[i]["LastEditDate"]);
+            c.setshortDate(this.obs[i]["LastEditDate"]);
+            if (this.obs[i]["LastReviewBy"] != 'sent') {
+              this.result.push(c);
+            }
+            
             //this.result[i] = c;
             //console.log("i=" + i);
             //console.log(c);
@@ -526,7 +443,7 @@ export class ManagerPortalComponent implements OnInit {
     return true;
   }
   logout(){
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], {skipLocationChange: true});
     
   }
 
@@ -540,6 +457,8 @@ class CatDetails {
   Type: string;
   Category: string;
   User: string;
+  Date: string;
+  shortDate: string;
 
   public CatDetails() {
       this.URL = '';
@@ -548,6 +467,8 @@ class CatDetails {
       this.Type = '';
       this.Category = '';
       this.User = '';
+      this.Date = '';
+      this.shortDate = '';
   }
 
   public getUser(): string {
@@ -565,7 +486,26 @@ class CatDetails {
   public setURL(url: string): void {
       this.URL = url;
   }
+  public getDate(): string {
+    return this.Date;
+  }
 
+  public setDate(date: string): void {
+    this.Date =  date;
+    
+  }
+  public getshortDate(): string {
+    return this.shortDate;
+  }
+
+  public setshortDate(date: string): void {
+    this.shortDate = date.slice(0,10);
+    var year = date.slice(0,4);
+    var day = date.slice(5,7);
+    var month = date.slice(8,10);
+    this.shortDate = day + "-" + month + "-" + year;
+
+  }
   public getLastReview(): string {
       return this.LastReviewBy;
   }

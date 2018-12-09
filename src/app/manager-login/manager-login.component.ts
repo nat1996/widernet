@@ -48,12 +48,16 @@ export class ManagerLoginComponent implements OnInit {
       } else {
         console.log("allow");
         this.setName(user);
-        this.route.navigate(['/userDetail/' + this.usr]);
+        this.route.navigate(['/manager/' + this.usr], {skipLocationChange: true});
       }
       
       return this.match;
     });
     return this.match;
+  }
+  user(){
+    this.route.navigate(['/login'], {skipLocationChange: true});
+    
   }
 
   // allow(user: string, pwd1: string): boolean {

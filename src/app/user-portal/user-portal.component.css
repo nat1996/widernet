@@ -1,94 +1,47 @@
-/* body { 
-	font-family: Verdana, Geneva, Tahoma, sans-serif; 
-	font-size: 10pt;
-	height: 100%;
-	
-} */
-
-h1 {
-	color:#008080;
-	text-align:center;
-	font-size:24pt;
-	font-weight:bold;
-	font-family:Verdana, Geneva, Tahoma, sans-serif;
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  min-width: 300px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
-img {
-text-decoration: none;
-border:none;
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
 }
 
-table {
-	border-collapse:collapse;
+.table tr.active td {
+  background-color: #123456 !important;
+  color: white;
+}
+.edit{
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+  padding: 30px;
+  border-radius: 2px;
+}
+.filterInput {
+  margin-left: 5px; 
+  padding-right: 20px;
+  margin-right: 20px;
+  display: inline;
 }
 
-/* td { 
-	font-size: 12pt; 
-	font-family: Verdana;
-	vertical-align:top;
-	color:black;
+.typeShort{
 
-} */
-
-label {
-	font-weight:bold;
+  width: 200px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
 }
-.filter{
-    background-color: #e9ecef;
-    border-color: #dee2e6;
-    padding-left: 20px;
-    padding-top: 10px;
-  }
-
-.projectTableHead { 
-	border-left-width: 1px; 
-	border-right-width: 1px; 
-	border-top-width: 1px; 
-	border-bottom-style: solid; 
-	border-bottom-width:1px;
-	border-color: #003366;
-	background-color:#EAEAEA;
-	font-size:10px;
-	text-align:left;
-	color:#7c7c7c;
-	height:27px;
+#catFilter{
+  display: inline;
+  width: 200px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
-
-.sortable {
-	text-decoration:underline;
-	color:#808080;	
-}
-
-.sortable a {
-	color:inherit;
-}
-
-/* .dataCell {
-	border-left-width:1px;
-	border-right-width: 1px;
-	border-top-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	/* font-size:18px;
-	height: 27px;
-} */
-
-.dataCell a {
-		font-size:inherit;
-		text-decoration:none;
-}
-
-.dataCell:hover td {
-	background-color: #dee2e6 ;
-    color: black;
-}
-
-.addHost{
-		font-size:inherit;
-		text-decoration:none;
-}
-
-
 
 h3 {
   font-size: inherit;
@@ -97,56 +50,63 @@ h3 {
   margin-right: 20px;
 }
 
-.filterInput {
-  margin-left: 5px; 
-  padding-right: 20px;
-  margin-right: 20px;
-  display: inline;
+.filter{
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+  padding-left: 20px;
+  padding-top: 10px;
 }
 
-/* button {
-	color:#808080;
-} */
+.width{
+  min-width: 80px;
+}
+.dateWidth{
+  min-width: 90px;
+}
 
-.example-container {
-    display: flex;
-    flex-direction: column;
-    max-height: 85vh;
-    min-width: 300px;
-    margin-left: 100px;
-    margin-right: 100px;
-  }
-  
-  .mat-table {
-    overflow: auto;
-    max-height: 500px;
-  }
-
-  .table tr.active td {
-    background-color: #123456 !important;
-    color: white;
-  }
-  
-  .logoutbtn{
-    float: right;
-    margin-top: 8px;
-    margin-right: 20px;
-    padding: 0 6px 0 6px;
-    /* margin: 6px 8px 6px 8px; */
-    /* min-width: 88px; */
-    border-radius: 3px;
-    /* font-size: 14px; */
-    text-align: center;
-    text-transform: uppercase;
-    text-decoration:none;
-    border: none;
-    outline: none;
-    padding: 10px;
-    background-color: rgba(158, 158, 158, 0.2); 
+.logoutbtn{
+  float: right;
+  margin-top: 8px;
+  margin-right: 20px;
+  padding: 0 6px 0 6px;
+  /* margin: 6px 8px 6px 8px; */
+  /* min-width: 88px; */
+  border-radius: 3px;
+  /* font-size: 14px; */
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration:none;
+  border: none;
+  outline: none;
+  padding: 10px;
+  background-color: rgba(158, 158, 158, 0.2); 
 
 
-  }
-  .logoutbtn:not([disabled]):hover {
-    background-color: rgba(250, 151, 66); 
+}
+.logoutbtn:not([disabled]):hover {
+  background-color: rgba(250, 151, 66); 
 
-  }
+}
+
+.exportbtn{
+  margin-bottom: 10px;
+}
+.url {
+
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}

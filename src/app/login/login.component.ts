@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   public inDB: boolean;
   public match: boolean;
   public num: string;
+  
 
   public httpOptions = {
     headers: new HttpHeaders({
@@ -52,12 +53,16 @@ export class LoginComponent implements OnInit {
       } else {
         console.log("allow");
         this.setName(user);
-        this.route.navigate(['/userDetail/' + this.usr]);
+        this.route.navigate(['/userDetail/' + this.usr], {skipLocationChange: true});
       }
       
       return this.match;
     });
     return this.match;
+  }
+  manager(){
+    this.route.navigate(['/managerLogin'], {skipLocationChange: true});
+    
   }
 
   // allow(user: string, pwd1: string): boolean {

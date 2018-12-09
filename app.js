@@ -7,7 +7,7 @@ var cors = require('cors');
 var passport = require('passport')
 var LdapStrategy = require('passport-ldapauth');
 var session = require('express-session');
-
+var LdapAuth = require('ldapauth-fork');
 
 const helmet = require('helmet')
 var id = 800;
@@ -51,13 +51,7 @@ var dbserver = app.listen(3300, "127.0.0.1", function () {
 // //   this.state = { loggedin: false }
 // //   this.login()
 // // }
-// var app2 = express();
- 
-// passport.use(new LdapStrategy(OPTS));//will need to change since I do not know the 
- 
-// app2.use(bodyParser.json());
-// app2.use(bodyParser.urlencoded({extended: false}));
-// app2.use(passport.initialize());
+
 
 // var getLDAPConfiguration = function (req, callback) {
 //   process.nextTick(function () {
@@ -137,33 +131,33 @@ var dbserver = app.listen(3300, "127.0.0.1", function () {
 //     })
 // }
 
-// // passport.use(new LdapStrategy(Opts)
-// //   function (user, done) {
-// //     winston.info("LDAP user ", user.displayName, "is logged in.")
-// //     return done(null, user);
-// //   }))
+// passport.use(new LdapStrategy(Opts)
+//   function (user, done) {
+//     winston.info("LDAP user ", user.displayName, "is logged in.")
+//     return done(null, user);
+//   })
 
 
-// // var OPTS = {
-// //   server: {
-// //      url: 'ldap://localhost:10389',
-// //     // bindDN: 'cn=root',
-// //     // bindCredentials: 'secret',
-// //     // searchBase: 'ou=Users',
-// //     // searchFilter: '(uid={{username}})'
-// //     bindDn: `uid=${req.body.username},Ou=Users`,
-// //     bindCredentials: `${req.body.password}`,
-// //     searchBase: 'Ou=Users',
-// //     searchFilter: `uid=${req.body.username}`,
-// //     reconnect: true
-// //   }
-// // };
+// var OPTS = {
+//   server: {
+//      url: 'ldap://localhost:10389',
+//     // bindDN: 'cn=root',
+//     // bindCredentials: 'secret',
+//     // searchBase: 'ou=Users',
+//     // searchFilter: '(uid={{username}})'
+//     bindDn: `uid=${req.body.username},Ou=Users`,
+//     bindCredentials: `${req.body.password}`,
+//     searchBase: 'Ou=Users',
+//     searchFilter: `uid=${req.body.username}`,
+//     reconnect: true
+//   }
+// };
  
 
  
-// // app2.post('/login', passport.authenticate('ldapauth', {session: false}), function(req, res) {
-// //   res.send({status: 'ok'});
-// // });
+// app2.post('/login', passport.authenticate('ldapauth', {session: false}), function(req, res) {
+//   res.send({status: 'ok'});
+// });
  
 // // var ldapserver = app2.listen(4300, "127.0.0.1", function () {
  
@@ -210,6 +204,7 @@ app.get('/managerUsers/:user', function(req, res, next) {
 	connection.query("select UserName from test.logins where Manager=?", [user] , function (error, results) {
         //if (error) throw error;
   console.log(results);
+      
      res.end(JSON.stringify({"status": 200, "error": null, "response": results}));
    });
 
@@ -264,11 +259,67 @@ app.post('/addApprove/:user/:resource/', function(req, res) {
 
 });
 
+app.post('/addSent', function(req, res) {
+  console.log("add sent to category");
+
+	connection.query("update test.rp set LastReviewBy = 'sent' where LastReviewBy = 'approved'", function (error, results) {
+        if (error) throw error;
+  console.log(results);
+     //res.send(user, pass);
+   });
+   id++;
+
+});
+// This will be updated for LDAP BELOW ------------------------------------------------------------------------------
 app.get('/checkUserPass/:user/:pass', function(req, res, next) {
   var user = req.params.user;
   var pass = req.params.pass;
+
+  var app2 = express();
+  var OPTS = {
+    server: {
+      url: 'ldap://localhost:10389',
+      bindDN: 'dc=example, dc=com',
+      bindCredentials: '' + pass + '',
+      searchBase: 'ou=Users',
+      searchFilter: '(uid='+user+')'
+      //  url: 'ldap://localhost:10389',
+      // // bindDN: 'cn=root',
+      // // bindCredentials: 'secret',
+      // // searchBase: 'ou=Users',
+      // // searchFilter: '(uid={{username}})'
+      // bindDn: `uid=${req.body.username},Ou=Users`,
+      // bindCredentials: `${req.body.password}`,
+      // searchBase: 'Ou=Users',
+      // searchFilter: `uid=${req.body.username}`,
+      // reconnect: true
+    }
+  };
+  // app2.use(bodyParser.json());
+  // app2.use(bodyParser.urlencoded({extended: false}));
+  // app2.use(passport.initialize());
+  // var ldapserver = app.listen(8080, "127.0.0.1", function () {
+ 
+  //   var host = ldapserver.address().address
+  //   var port = ldapserver.address().port
+  //  //"https://powerful-harbor-88011.herokuapp.com/" +
+  //   console.log("LDAP app listening at http://%s:%s", host, port)
+   
+  // });
+
+
+  // passport.use(new LdapStrategy(OPTS));
+  // console.log("about to try");
+  // app2.post('/login', passport.authenticate('ldapauth', {session: false}), function(req, res) {
+  //   console.log(res);
+  //   res.end(JSON.stringify({"status": 200, "error": null, "response": res}));
+  // });
+
+
+
+
 	connection.query("select count(*) from test.logins where UserName=? and Password=?", [user, pass] , function (error, results) {
-        //if (error) throw error;
+        if (error) throw error;
   console.log(results);
      res.end(JSON.stringify({"status": 200, "error": null, "response": results}));
    });
@@ -277,7 +328,7 @@ app.get('/checkUserPass/:user/:pass', function(req, res, next) {
 //eventually remove the limit of 5 in the following function
 app.get('/getCatDetails/:user', function(req, res, next) {
   var user = req.params.user;
-	connection.query("select R.Comments, R.User, R.URL, R.Type, R.LastReviewBy, C.Category from test.rp R inner join test.lkupegcategories C on R.CategoryID=C.eGCategoryID where User=? limit 5", [user] , function (error, results) {
+	connection.query("select R.Comments, R.User, R.URL, R.Type, R.LastReviewBy, R.LastEditDate, C.Category from test.rp R inner join test.lkupegcategories C on R.CategoryID=C.eGCategoryID where User=? order by R.LastEditDate desc limit 10", [user] , function (error, results) {
         if (error) throw error;
   console.log(results);
      res.end(JSON.stringify({"status": 200, "error": null, "response": results}));

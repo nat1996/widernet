@@ -76,6 +76,7 @@ import { UserPortalComponent } from &#x27;./user-portal/user-portal.component&#x
 import { ManagerPortalComponent } from &#x27;./manager-portal/manager-portal.component&#x27;;
 import { ManagerLoginComponent } from &#x27;./manager-login/manager-login.component&#x27;;
 import { ManagerRegisterComponent } from &#x27;./manager-register/manager-register.component&#x27;;
+import { TestComponent } from &#x27;./test/test.component&#x27;;
  
 const routes: Routes &#x3D; [
   { path: &#x27;&#x27;, redirectTo: &#x27;/register&#x27;, pathMatch: &#x27;full&#x27; },
@@ -84,7 +85,8 @@ const routes: Routes &#x3D; [
   { path: &#x27;register&#x27;, component: RegisterLoginComponent },
   { path: &#x27;manager/:user&#x27;, component: ManagerPortalComponent },
   { path: &#x27;managerLogin&#x27;, component: ManagerLoginComponent },
-  { path: &#x27;managerRegister&#x27;, component: ManagerRegisterComponent }
+  { path: &#x27;managerRegister&#x27;, component: ManagerRegisterComponent },
+  { path: &#x27;test&#x27;, component: TestComponent}
 ];
  
 @NgModule({
