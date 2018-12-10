@@ -240,6 +240,12 @@ export class ManagerPortalComponent implements OnInit {
 
   }
 
+  private dateCompare(a, b) {
+    var aa = a.split('-').reverse().join(),
+        bb = b.split('-').reverse().join();
+    return aa < bb ? -1 : (aa > bb ? 1 : 0);
+  }
+
   private userCompareASC(a, b) {
     if (a.User.toLowerCase() < b.User.toLowerCase()) {
      return -1;
@@ -420,6 +426,7 @@ export class ManagerPortalComponent implements OnInit {
         });
       } 
     });
+    this.result.sort(this.dateCompare);
     this.result2 = this.result;
     // this.http.get('http://127.0.0.1:3300/getCatDetails/' + user).subscribe(data => {
     //   this.obs = data["response"];
